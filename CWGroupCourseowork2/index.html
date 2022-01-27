@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .lessons{
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-evenly;
+        
+        }
+        .lesson{
+            height: 120px;
+            width: 220px;
+            border: 2px skyblue solid;
+
+        }
+    </style>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id='store'>
+        <section class="lessons">
+
+        <div class="lesson" v-for='lesson in lessons'>
+            <ul> 
+            <p>Topic: {{lesson.topic}}</p>
+            <p>Location: {{lesson.location}}</p>
+            <p>Price: {{lesson.price}}</p>
+        </ul>
+        </div>
+</section>
+
+
+     
+    </div>
+    <script>
+        let store = new Vue({
+            el: '#store',
+            data: {
+                lessons: []
+            },
+            created: function () {
+                console.log('requesting data from server ...')
+                
+    
+                fetch('http://localhost:3000/lessons').then(
+                    function (response) {
+                        response.json().then(
+                            function (json) {
+                                // save the returned JSON object to
+                                // 'product' data property
+                                store.lessons = json;
+                                for( i in json){
+                                    console.log(i)
+
+                                }
+                                console.log(json);
+                            });
+                    }
+                )
+            }
+
+        })
+    </script>
+</body>
+</html>
