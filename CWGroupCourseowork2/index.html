@@ -21,7 +21,7 @@
 <body>
     <div id='store'>
         <section class="lessons">
-
+    <!--Displays each lesson stored in the lessons array-->
         <div class="lesson" v-for='lesson in lessons'>
             <ul> 
             <p>Topic: {{lesson.topic}}</p>
@@ -44,18 +44,17 @@
                 console.log('requesting data from server ...')
                 
     
-                fetch('http://localhost:5000/lessons').then(
+                fetch('http://localhost:3000/lessons').then(
                     function (response) {
                         response.json().then(
                             function (json) {
                                 // save the returned JSON object to
-                                // 'product' data property
+                                // 'lessons' data property
                                 store.lessons = json;
                                 for( i in json){
                                     console.log(i)
-
                                 }
-                                console.log(json);
+                                
                             });
                     }
                 )
